@@ -33,15 +33,15 @@ public class ChatAIService {
 	 * @return 처리결과
 	 */
 	public ResponseEntity<ApiResponse<AIPurifyResponse>> callAI(ChatAIRequest request) {
-		ChatDetail chatDetail = chatDetailRepository.findByChatroomUUID(request.getChatroomUUID())
-				.orElseThrow(() -> new IllegalArgumentException("해당 채팅방을 찾을 수 없습니다."));
+		List<ChatDetail> chatDetails = chatDetailRepository.findByChatroomUUID(request.getChatroomUUID());
 
 		chatMessageRepository.save(ChatMessage.createMessage(request));
 
 		if (request.getChatType() == ChatType.CHAT_FIlTER) {
-			return aiClient.purifyMessage(new AIRequest(request.getUsername(), chatDetail.getRelationship().toString(),
-					request.getChatroomUUID(),
-					request.getChatMessage(), request.getChatType()));
+			return aiClient.purifyMessage(
+					new AIRequest(request.getUsername(), chatDetails.get(0).getRelationship().toString(),
+							request.getChatroomUUID(),
+							request.getChatMessage(), request.getChatType()));
 		}
 		// TODO: 2024/09/6 요약 처리 로직 추가하기
 		return null;

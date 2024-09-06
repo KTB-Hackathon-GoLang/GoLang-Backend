@@ -46,7 +46,7 @@ jobs:
         docker push ${{ secrets.DOCKER_IMAGE_NAME }}:latest
           
   # 도커 이미지 EC2 인스턴스에 배포
-  deploy_to_ec2:
+  deploy-to-ec2:
     needs: build-and-push
     runs-on: ubuntu-24.04
 

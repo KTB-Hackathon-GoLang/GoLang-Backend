@@ -1,6 +1,6 @@
 package golang.chat.repository;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,5 +16,5 @@ import golang.chat.domain.entity.ChatDetail;
 public interface ChatDetailRepository extends JpaRepository<ChatDetail, Long> {
 
 	@Query("select cd from ChatDetail cd where cd.chatroom.chatroomUUID = :chatroomUUID")
-	Optional<ChatDetail> findByChatroomUUID(String chatroomUUID);
+	List<ChatDetail> findByChatroomUUID(String chatroomUUID);
 }
