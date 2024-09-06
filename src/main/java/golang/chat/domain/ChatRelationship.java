@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public enum ChatRelationship {
     COUPLE("커플"),
-    MARRY("부부"),
+    FRIEND("친구"),
     FAMILY("가족"),
     ETC("기타");
 

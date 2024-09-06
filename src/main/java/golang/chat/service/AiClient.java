@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import golang.chat.domain.dto.request.AIRequest;
+import golang.chat.domain.dto.response.AIPurifyResponse;
 import golang.chat.domain.dto.response.ApiResponse;
 
 /**
@@ -17,5 +18,5 @@ import golang.chat.domain.dto.response.ApiResponse;
 public interface AiClient {
 
 	@PostMapping("/ai/purify")
-	ResponseEntity<ApiResponse<List<String>>> purifyMessage(@RequestBody AIRequest request);
+	ResponseEntity<ApiResponse<AIPurifyResponse>> purifyMessage(@RequestBody AIRequest request);
 }

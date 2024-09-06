@@ -2,9 +2,9 @@ package golang.chat.domain.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import golang.chat.domain.ChatType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * AI 호출용 객체
@@ -14,8 +14,12 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AIRequest {
 
-	@JsonProperty("user_name")
-	private String userName; // 전송자 아이디
-	private String relation; // 채팅방 관계
-	private String message; // 요청할 메시지
+	private String username;
+	private String relation;
+	@JsonProperty("chatroom_uuid")
+	private String chatroomUUID;
+	@JsonProperty("chat_message")
+	private String chatMessage;
+	@JsonProperty("chat_type")
+	private ChatType chatType;
 }
