@@ -37,7 +37,7 @@ public class MemberController {
         if (username == null || username.isEmpty()) {
             MemberLoginResponse newMember = memberService.saveRandomMember();
             Cookie usernameCookie = new Cookie("username", newMember.getUsername());
-            usernameCookie.setHttpOnly(true);
+            // usernameCookie.setHttpOnly(true);
             response.addCookie(usernameCookie);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(ApiResponse.success("로그인 하였습니다.", newMember));
