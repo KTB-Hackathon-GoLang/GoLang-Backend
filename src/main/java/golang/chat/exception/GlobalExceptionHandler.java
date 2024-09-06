@@ -16,6 +16,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleGlobalException(Exception ex) {
         logger.error(ex.getMessage(), ex);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiResponse.failure("An unexpected error occurred. Please try again later."));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiResponse.failure("다시 시도해주세요."));
     }
 }
