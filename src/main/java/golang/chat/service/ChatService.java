@@ -1,5 +1,6 @@
 package golang.chat.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.domain.Pageable;
@@ -13,12 +14,14 @@ import golang.chat.domain.dto.request.ChatroomRequest;
 import golang.chat.domain.dto.response.ChatMessageResponse;
 import golang.chat.domain.dto.response.ChatroomInfo;
 import golang.chat.domain.dto.response.ChatroomResponse;
+import golang.chat.domain.entity.ChatDetail;
 import golang.chat.domain.entity.ChatFile;
 import golang.chat.domain.entity.ChatMember;
 import golang.chat.domain.entity.ChatMessage;
 import golang.chat.domain.entity.Chatroom;
 import golang.chat.domain.entity.Member;
 import golang.chat.domain.redis.RedisPublisher;
+import golang.chat.repository.ChatDetailRepository;
 import golang.chat.repository.ChatFileRepository;
 import golang.chat.repository.ChatMemberRepository;
 import golang.chat.repository.ChatMessageRepository;
@@ -39,6 +42,7 @@ public class ChatService {
 	private final ChatMemberRepository chatMemberRepository;
 	private final ChatMessageRepository chatMessageRepository;
 	private final ChatFileRepository chatFileRepository;
+	private final ChatDetailRepository chatDetailRepository;
 
 	/**
 	 * 채팅방 UUID값으로 채팅방의 정보를 찾아 반환합니다.
@@ -137,6 +141,7 @@ public class ChatService {
 			ChatFile chatFile = ChatFile.createChatFile(request.getFilename(), chatRoom);
 			chatFileRepository.save(chatFile);
 		}
+		chatDetailRepository.save(ChatDetail.createChatDetail(request, chatRoom));
 
 		return new ChatroomInfo(chatRoom.getChatroomName(), chatRoom.getChatroomUUID());
 	}
@@ -148,6 +153,10 @@ public class ChatService {
 	 */
 	@Transactional
 	public void sendChatMessage(ChatMessageRequest request) {
+		Chatroom chatroom = chatroomRepository.findByRoomUUID(request.getChatroomUUID())
+				.orElseThrow(() -> new IllegalArgumentException("해당 UUID에 해당하는 채팅방을 찾을 수 없습니다."));
+
+		chatroom.updateLastTime(LocalDateTime.now().toString());
 		chatMessageRepository.save(ChatMessage.createMessage(request));
 		redisPublisher.publish(request);
 	}
