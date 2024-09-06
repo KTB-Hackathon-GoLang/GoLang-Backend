@@ -17,6 +17,4 @@ public interface ChatMemberRepository extends JpaRepository<ChatMember, Long> {
     @Query("select cm from ChatMember cm join fetch cm.member m where cm.chatroom.chatroomUUID = :roomUUID")
     List<ChatMember> findByChatroomUUID(String roomUUID);
 
-    @Query("select cm.member.username from ChatMember cm where cm.chatroom.chatroomUUID = :chatroomUUID")
-    List<ChatMember> findUsernamesByChatroomUUID(List<String> chatroomUUIDList);
 }

@@ -14,10 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * 채팅 서비스
@@ -60,21 +57,10 @@ public class ChatService {
     public List<ChatroomResponse> findByUsername(String username) {
         // 사용자가 참여한 채팅방 목록을 가져옴
         List<Chatroom> chatRooms = chatroomRepository.findByUsername(username);
-
-        // 각 Chatroom에 대해 usernames를 조회하여 Map으로 변환
-        Map<Long, List<String>> usernamesMap = chatRooms.stream()
-                .collect(Collectors.toMap(
-                        Chatroom::getId,
-                        chatRoom -> chatMemberRepository.findUsernamesByChatroomUUID(
-                                        Collections.singletonList(chatRoom.getChatroomUUID()) // 단일 UUID로 조회
-                                ).stream()
-                                .map(ChatMember::getMember) // ChatMember에서 Member 가져오기
-                                .map(Member::getUsername) // Member에서 username 추출
-                                .collect(Collectors.toList())
-                ));
-
-        // ChatroomResponse 생성
-        return ChatroomResponse.fromEntityList(usernamesMap, chatRooms);
+        return chatRooms.stream()
+                .map(Chatroom::getChatroomUUID)
+                .map(this::findByChatUUID)
+                .toList();
     }
 
     /**
