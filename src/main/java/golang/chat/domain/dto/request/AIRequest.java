@@ -16,6 +16,6 @@ public class AIRequest {
 
 	@JsonProperty("user_name")
 	private String userName; // 전송자 아이디
-	private String relationship; // 채팅방 관계
+	private String relation; // 채팅방 관계
 	private String message; // 요청할 메시지
 }
