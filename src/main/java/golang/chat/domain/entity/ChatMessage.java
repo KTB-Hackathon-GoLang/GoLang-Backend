@@ -16,14 +16,14 @@ import java.time.LocalDateTime;
 @Document(collection = "chatMessage")
 public class ChatMessage {
 
-    private String chatRoomUUID; // 채팅방 UUID
+    private String chatroomUUID; // 채팅방 UUID
     private String username; // 전송한 사용자의 ID
     private String message; // 메시지 내용
     private LocalDateTime sendAt; // 메시지 전송시간
 
     public static ChatMessage createMessage(ChatMessageRequest request) {
         return ChatMessage.builder()
-                .chatRoomUUID(request.getChatroomUUID())
+                .chatroomUUID(request.getChatroomUUID())
                 .username(request.getUsername())
                 .message(request.getMessage())
                 .sendAt(LocalDateTime.now())
