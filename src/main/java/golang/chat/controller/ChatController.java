@@ -175,6 +175,17 @@ public class ChatController {
 		return chatAIService.callAI(request);
 	}
 
+	/**
+	 * 가상채팅 AI API
+	 * @param request 채팅 AI 요청
+	 * @return 처리결과
+	 */
+	@PostMapping("/chatrooms/ai-chat")
+	public ResponseEntity<ApiResponse<String>> callChatAIClient(@RequestBody ChatAIRequest request) {
+
+		return chatAIService.callChatAI(request);
+	}
+
 	// TODO : finish api 추가
 	// @PostMapping("/chatrooms/finish")
 

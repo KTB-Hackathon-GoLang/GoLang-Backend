@@ -20,4 +20,7 @@ public interface AiClient {
 
 	@PostMapping("/ai/summarize")
 	ResponseEntity<ApiResponse<AIResponse>> summarizeMessage(@RequestBody AIRequest request);
+
+	@PostMapping("/ai/chat")
+	ResponseEntity<ApiResponse<String>> chatAI(@RequestBody AIRequest request);
 }

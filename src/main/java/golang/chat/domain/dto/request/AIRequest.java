@@ -10,7 +10,6 @@ import lombok.Getter;
  * AI 호출용 객체
  */
 @Getter
-// @Setter TODO: openfeign에 setter가 필요한지 테스트하고 정리하기
 @AllArgsConstructor
 public class AIRequest {
 

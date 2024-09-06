@@ -45,6 +45,20 @@ public class ChatAIService {
 				request.getChatMessage(), request.getChatType()));
 	}
 
+	/** 가상채팅 요청을 받아 AI 호출 메서드
+	 *
+	 * @param request 채팅 AI 요청
+	 * @return 처리결과
+	 */
+	public ResponseEntity<ApiResponse<String>> callChatAI(ChatAIRequest request) {
+		String relation = getRelation(request);
+
+		chatMessageRepository.save(ChatMessage.createMessage(request));
+
+		return aiClient.chatAI(new AIRequest(request.getUsername(), relation, request.getChatroomUUID(),
+				request.getChatMessage(), request.getChatType()));
+	}
+
 	private String getRelation(ChatAIRequest request) {
 		return chatDetailRepository.findByChatroomUUID(request.getChatroomUUID())
 				.get(0).getRelationship().toString();
