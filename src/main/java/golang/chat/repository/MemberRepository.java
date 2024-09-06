@@ -1,18 +1,14 @@
 package golang.chat.repository;
 
-import java.util.Optional;
-
+import golang.chat.domain.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import golang.chat.domain.entity.Member;
+import java.util.Optional;
 
 /**
  * 회원 Repository
- *
- * @author : parkjihyeok
- * @since : 2024/09/05
  */
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
-	Optional<Member> findByUsername(String username);
+    Optional<Member> findByUsername(String username);
 }
