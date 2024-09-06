@@ -205,7 +205,7 @@ gradle-app.setting
 !gradle-wrapper.properties
 
 # Cache of project
-.gradletasknamecache
+.gradletasknamecacheg
 
 # Eclipse Gradle plugin generated files
 # Eclipse Core
@@ -216,5 +216,3 @@ gradle-app.setting
 ### Gradle Patch ###
 # Java heap dump
 *.hprof
-
-application.yml
