@@ -121,7 +121,7 @@ public class ChatService {
 	 * @return 해당하는 채팅 내역
 	 */
 	public List<ChatMessageResponse> findMessage(String roomUUID, Pageable pageable) {
-		return chatMessageRepository.findByChatRoomUUIDOrderBySendAtDesc(roomUUID, pageable)
+		return chatMessageRepository.findByChatroomUUIDOrderBySendAtDesc(roomUUID, pageable)
 				.map(ChatMessageResponse::fromEntity)
 				.toList();
 	}

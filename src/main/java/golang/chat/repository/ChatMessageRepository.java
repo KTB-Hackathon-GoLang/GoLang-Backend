@@ -17,5 +17,5 @@ public interface ChatMessageRepository extends MongoRepository<ChatMessage, Stri
      * @param pageable 페이지 정보
      * @return 해당 페이지
      */
-    Page<ChatMessage> findByChatRoomUUIDOrderBySendAtDesc(String roomUUID, Pageable pageable);
+    Page<ChatMessage> findByChatroomUUIDOrderBySendAtDesc(String roomUUID, Pageable pageable);
 }
