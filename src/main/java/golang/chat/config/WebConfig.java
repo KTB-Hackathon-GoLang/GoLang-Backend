@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * CORS 등 웹 전반적인 설정파일
  */
-@Configuration
+// @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
     /**
