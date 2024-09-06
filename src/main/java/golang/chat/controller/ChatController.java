@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import golang.chat.domain.dto.request.ChatAIRequest;
 import golang.chat.domain.dto.request.ChatMessageRequest;
 import golang.chat.domain.dto.request.ChatroomJoinRequest;
 import golang.chat.domain.dto.request.ChatroomMakeDetailRequest;
@@ -23,6 +24,7 @@ import golang.chat.domain.dto.response.ApiResponse;
 import golang.chat.domain.dto.response.ChatMessageResponse;
 import golang.chat.domain.dto.response.ChatroomInfo;
 import golang.chat.domain.dto.response.ChatroomResponse;
+import golang.chat.service.ChatAIService;
 import golang.chat.service.ChatService;
 import golang.chat.service.FileService;
 
@@ -36,11 +38,14 @@ public class ChatController {
 	private final ChatService chatService;
 	private final FileService fileService;
 	private final String FILE_PATH;
+	private final ChatAIService chatAIService;
 
-	public ChatController(ChatService chatService, FileService fileService, @Value("${FILE_PATH}") String FILE_PATH) {
+	public ChatController(ChatService chatService, FileService fileService, @Value("${FILE_PATH}") String FILE_PATH,
+			ChatAIService chatAIService) {
 		this.chatService = chatService;
 		this.fileService = fileService;
 		this.FILE_PATH = FILE_PATH;
+		this.chatAIService = chatAIService;
 	}
 
 	/**
@@ -156,6 +161,17 @@ public class ChatController {
 		List<ChatMessageResponse> message = chatService.findMessage(chatroomUUID, pageable);
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(ApiResponse.success(message));
+	}
+
+	/**
+	 * 채팅 AI 기능 API
+	 * @param request 채팅 AI 요청
+	 * @return 처리결과
+	 */
+	@PostMapping("/chatrooms/ai")
+	public ResponseEntity<ApiResponse<List<String>>> callAIClient(@RequestBody ChatAIRequest request) {
+
+		return chatAIService.callAI(request);
 	}
 
 	// TODO : finish api 추가
