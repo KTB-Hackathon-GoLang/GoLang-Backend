@@ -1,14 +1,12 @@
 package golang.chat.service;
 
-import java.util.List;
-
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import golang.chat.domain.dto.request.AIRequest;
-import golang.chat.domain.dto.response.AIPurifyResponse;
+import golang.chat.domain.dto.response.AIResponse;
 import golang.chat.domain.dto.response.ApiResponse;
 
 /**
@@ -18,5 +16,8 @@ import golang.chat.domain.dto.response.ApiResponse;
 public interface AiClient {
 
 	@PostMapping("/ai/purify")
-	ResponseEntity<ApiResponse<AIPurifyResponse>> purifyMessage(@RequestBody AIRequest request);
+	ResponseEntity<ApiResponse<AIResponse>> purifyMessage(@RequestBody AIRequest request);
+
+	@PostMapping("/ai/summarize")
+	ResponseEntity<ApiResponse<AIResponse>> summarizeMessage(@RequestBody AIRequest request);
 }

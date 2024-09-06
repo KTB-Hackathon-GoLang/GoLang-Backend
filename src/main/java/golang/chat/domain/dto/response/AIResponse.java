@@ -10,8 +10,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public class AIPurifyResponse {
+public class AIResponse {
 
-	private List<String> message1;
-	private List<String> message2;
+	private List<String> messages;
 }

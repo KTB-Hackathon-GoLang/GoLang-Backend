@@ -20,7 +20,7 @@ import golang.chat.domain.dto.request.ChatMessageRequest;
 import golang.chat.domain.dto.request.ChatroomJoinRequest;
 import golang.chat.domain.dto.request.ChatroomMakeDetailRequest;
 import golang.chat.domain.dto.request.ChatroomRequest;
-import golang.chat.domain.dto.response.AIPurifyResponse;
+import golang.chat.domain.dto.response.AIResponse;
 import golang.chat.domain.dto.response.ApiResponse;
 import golang.chat.domain.dto.response.ChatMessageResponse;
 import golang.chat.domain.dto.response.ChatroomInfo;
@@ -170,7 +170,7 @@ public class ChatController {
 	 * @return 처리결과
 	 */
 	@PostMapping("/chatrooms/ai")
-	public ResponseEntity<ApiResponse<AIPurifyResponse>> callAIClient(@RequestBody ChatAIRequest request) {
+	public ResponseEntity<ApiResponse<AIResponse>> callAIClient(@RequestBody ChatAIRequest request) {
 
 		return chatAIService.callAI(request);
 	}
