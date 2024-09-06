@@ -1,5 +1,6 @@
 package golang.chat.domain.entity;
 
+import golang.chat.domain.dto.request.ChatAIRequest;
 import golang.chat.domain.dto.request.ChatMessageRequest;
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -26,6 +27,15 @@ public class ChatMessage {
                 .chatroomUUID(request.getChatroomUUID())
                 .username(request.getUsername())
                 .message(request.getMessage())
+                .sendAt(LocalDateTime.now())
+                .build();
+    }
+
+    public static ChatMessage createMessage(ChatAIRequest request) {
+        return ChatMessage.builder()
+                .chatroomUUID(request.getChatroomUUID())
+                .username(request.getUsername())
+                .message(request.getChatMessage())
                 .sendAt(LocalDateTime.now())
                 .build();
     }

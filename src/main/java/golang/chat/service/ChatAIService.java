@@ -10,7 +10,9 @@ import golang.chat.domain.dto.request.AIRequest;
 import golang.chat.domain.dto.request.ChatAIRequest;
 import golang.chat.domain.dto.response.ApiResponse;
 import golang.chat.domain.entity.ChatDetail;
+import golang.chat.domain.entity.ChatMessage;
 import golang.chat.repository.ChatDetailRepository;
+import golang.chat.repository.ChatMessageRepository;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -22,6 +24,7 @@ public class ChatAIService {
 
 	private final AiClient aiClient;
 	private final ChatDetailRepository chatDetailRepository;
+	private final ChatMessageRepository chatMessageRepository;
 
 	/** 채팅 AI 요청을 받아 AI 호출 메서드
 	 *
@@ -31,6 +34,8 @@ public class ChatAIService {
 	public ResponseEntity<ApiResponse<List<String>>> callAI(ChatAIRequest request) {
 		ChatDetail chatDetail = chatDetailRepository.findByChatroomUUID(request.getChatroomUUID())
 				.orElseThrow(() -> new IllegalArgumentException("해당 채팅방을 찾을 수 없습니다."));
+
+		chatMessageRepository.save(ChatMessage.createMessage(request));
 
 		if (request.getChatType() == ChatType.CHAT_FIlTER) {
 			return aiClient.purifyMessage(new AIRequest(request.getUsername(), chatDetail.getRelationship().toString(),
