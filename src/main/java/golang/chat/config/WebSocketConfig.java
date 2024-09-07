@@ -28,7 +28,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/chat/ws")  // WebSocket 엔드포인트를 "/chat/ws"로 설정
-                .setAllowedOriginPatterns("https://www.golang-ktb.site"); // 모든 도메인에서의 WebSocket 연결 허용
-//                .withSockJS();  // SockJS를 활성화하여 WebSocket을 지원하지 않는 브라우저에서도 사용 가능
+                .setAllowedOriginPatterns("https://www.golang-ktb.site") // 모든 도메인에서의 WebSocket 연결 허용
+                .withSockJS();  // SockJS를 활성화하여 WebSocket을 지원하지 않는 브라우저에서도 사용 가능
     }
 }

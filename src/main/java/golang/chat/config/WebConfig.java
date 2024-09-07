@@ -15,7 +15,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOriginPatterns("https://api.golang-ktb.site")
+                .allowedOriginPatterns("https://www.golang-ktb.site")
                 .allowedMethods("GET", "POST") // GET, POST 허용
                 .allowCredentials(true); // 쿠키 인증 요청 허용
     }
