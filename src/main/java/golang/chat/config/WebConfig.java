@@ -1,6 +1,5 @@
 package golang.chat.config;
 
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -16,7 +15,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOriginPatterns("*")
+                .allowedOrigins("https://www.golang-ktb.site")
                 .allowedMethods("GET", "POST") // GET, POST 허용
                 .allowCredentials(true); // 쿠키 인증 요청 허용
     }
