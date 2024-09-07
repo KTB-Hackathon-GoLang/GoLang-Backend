@@ -3,6 +3,8 @@ package golang.chat.service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +38,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ChatService {
 
+	private static final Logger log = LoggerFactory.getLogger(ChatService.class);
 	private final RedisPublisher redisPublisher;
 	private final MemberRepository memberRepository;
 	private final ChatroomRepository chatroomRepository;
@@ -153,6 +156,7 @@ public class ChatService {
 	 */
 	@Transactional
 	public void sendChatMessage(ChatMessageRequest request) {
+		log.info("채팅방 UUID: " + request.getChatroomUUID());
 		Chatroom chatroom = chatroomRepository.findByRoomUUID(request.getChatroomUUID())
 				.orElseThrow(() -> new IllegalArgumentException("해당 UUID에 해당하는 채팅방을 찾을 수 없습니다."));
 
