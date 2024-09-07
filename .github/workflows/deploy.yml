@@ -60,7 +60,7 @@ jobs:
 
           # 기존 컨테이너 중지
           script: |
-            CONTAINER_ID=$(sudo docker ps -aq --filter "name=golang")
+            CONTAINER_ID=$(sudo docker ps -aq --filter "name=^golang$")
 
             if [ ! -z "$CONTAINER_ID" ]; then
               sudo docker stop $CONTAINER_ID || true
